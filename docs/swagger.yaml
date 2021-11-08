@@ -1,0 +1,13 @@
+info:
+  contact: {}
+  description: API to fetch covid case in a state of India.
+  license:
+    name: license Unknown
+  title: Covid-Meter
+  version: "1.0"
+paths:
+  /covid:
+    get: {}
+  /health:
+    get: {}
+swagger: "2.0"

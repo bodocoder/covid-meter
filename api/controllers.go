@@ -9,7 +9,23 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-// this is a controller for route /api/covid?lat=&lon=
+// @Summary get covid case in a state
+// @Description It takes latitude and longitude of a location in India
+// @Description and return total covid case in state of that location
+// @Tags Endpoint
+
+// Accept */*
+// @Produce json
+
+// @Param lat query string true "lattitude"
+// @Param lon query string true "longitude"
+
+// Success 200 {integer} string "result"
+// Failure 400 {string} string "ok"
+// Failure 404 {string} string "ok"
+// Failure 500 {string} string "ok"
+
+// @Router /covid [get]
 func GetCovidCaseIn(c echo.Context) error {
 	lat := c.QueryParam("lat")
 	lon := c.QueryParam("lon")
@@ -22,4 +38,21 @@ func GetCovidCaseIn(c echo.Context) error {
 
 	res := db.GetCase(state) // get data from db provided state name
 	return c.JSON(http.StatusOK, res)
+}
+
+// @Summary Check server health
+// @Description Expected server is up!
+// @Tags Health
+
+// Accept */*
+// @Produce string
+
+// Success 200 {integer} string "result"
+// Failure 400 {string} string "ok"
+// Failure 404 {string} string "ok"
+// Failure 500 {string} string "ok"
+
+// @Router /health [get]
+func GetServerHealth(c echo.Context) error {
+	return c.String(http.StatusOK, "server is up!")
 }
