@@ -1,13 +1,61 @@
+basePath: /api/v1
+host: localhost:1323
 info:
-  contact: {}
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
   description: API to fetch covid case in a state of India.
   license:
-    name: license Unknown
+    name: license.name Yet to get
+    url: license.url.yet.to.get
+  termsOfService: http://swagger.io/terms/
   title: Covid-Meter
   version: "1.0"
 paths:
   /covid:
-    get: {}
+    get:
+      consumes:
+      - application/json
+      description: |-
+        It takes latitude and longitude of a location in India
+        and return total covid case in state of that location
+      parameters:
+      - description: lattitude
+        in: query
+        name: lat
+        required: true
+        type: string
+      - description: longitude
+        in: query
+        name: lon
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: get covid case in a state.
+      tags:
+      - MainEndpoint
   /health:
-    get: {}
+    get:
+      consumes:
+      - application/json
+      description: expected server is up!
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: show the status of server.
+      tags:
+      - ServerHealth
 swagger: "2.0"

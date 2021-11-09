@@ -17,9 +17,15 @@ var doc = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "contact": {},
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.swagger.io/support",
+            "email": "support@swagger.io"
+        },
         "license": {
-            "name": "license Unknown"
+            "name": "license.name Yet to get",
+            "url": "license.url.yet.to.get"
         },
         "version": "{{.Version}}"
     },
@@ -27,10 +33,68 @@ var doc = `{
     "basePath": "{{.BasePath}}",
     "paths": {
         "/covid": {
-            "get": {}
+            "get": {
+                "description": "It takes latitude and longitude of a location in India\nand return total covid case in state of that location",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "MainEndpoint"
+                ],
+                "summary": "get covid case in a state.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "lattitude",
+                        "name": "lat",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "longitude",
+                        "name": "lon",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
         },
         "/health": {
-            "get": {}
+            "get": {
+                "description": "expected server is up!",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ServerHealth"
+                ],
+                "summary": "show the status of server.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
         }
     }
 }`
@@ -47,8 +111,8 @@ type swaggerInfo struct {
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = swaggerInfo{
 	Version:     "1.0",
-	Host:        "",
-	BasePath:    "",
+	Host:        "localhost:1323",
+	BasePath:    "/api/v1",
 	Schemes:     []string{},
 	Title:       "Covid-Meter",
 	Description: "API to fetch covid case in a state of India.",
