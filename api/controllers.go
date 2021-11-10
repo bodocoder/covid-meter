@@ -6,6 +6,7 @@ import (
 
 	"github.com/bodocoder/covid-meter/pkg/db"
 	"github.com/bodocoder/covid-meter/pkg/util"
+	_ "github.com/bodocoder/covid-meter/types"
 	"github.com/labstack/echo/v4"
 )
 
@@ -17,7 +18,7 @@ import (
 // @Produce json
 // @Param lat query string true "lattitude"
 // @Param lon query string true "longitude"
-// @Success 200 {object} map[string]interface{}
+// @Success 200 {object} types.SimpleCovidCaseState
 // @Router /covid [get]
 func GetCovidCaseIn(c echo.Context) error {
 	lat := c.QueryParam("lat")
@@ -38,7 +39,7 @@ func GetCovidCaseIn(c echo.Context) error {
 // @Tags ServerHealth
 // @Accept json
 // @Produce json
-// @Success 200 {object} map[string]interface{}
+// @Success 200 {object} string "OK"
 // @Router /health [get]
 func GetServerHealth(c echo.Context) error {
 	return c.JSON(http.StatusOK, "server is up!")

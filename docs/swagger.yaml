@@ -1,4 +1,18 @@
 basePath: /api/v1
+definitions:
+  types.SimpleCovidCaseState:
+    properties:
+      confirmed:
+        type: integer
+      deceased:
+        type: integer
+      lastUpdated:
+        type: string
+      recovered:
+        type: integer
+      state:
+        type: string
+    type: object
 host: localhost:1323
 info:
   contact:
@@ -37,8 +51,7 @@ paths:
         "200":
           description: OK
           schema:
-            additionalProperties: true
-            type: object
+            $ref: '#/definitions/types.SimpleCovidCaseState'
       summary: get covid case in a state.
       tags:
       - MainEndpoint
@@ -53,8 +66,7 @@ paths:
         "200":
           description: OK
           schema:
-            additionalProperties: true
-            type: object
+            type: string
       summary: show the status of server.
       tags:
       - ServerHealth
